@@ -1,0 +1,208 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Check your answers
+{% endblock %}
+
+{% block beforeContent %}
+  <a class="govuk-back-link" href="javascript:window.history.back()">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+      <h1 class="govuk-heading-xl">Check your answers before sending</h1>
+
+      <h2 class="govuk-heading-m">Personal details</h2>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    
+    <!-- Details -->
+        
+        <div class="govuk-summary-list__row">
+      
+          <dt class="govuk-summary-list__key">
+            What is your full name?
+          </dt>
+          <dd class="govuk-summary-list__value">
+        
+
+            {% if  data['first-name'] %}
+            {{ data['first-name'] }}
+            {% else %}
+            Do you even exist.
+            {% endif %}
+
+
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="/details">
+              Change
+              <span class="govuk-visually-hidden"> name</span>
+            </a>
+          </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+      
+          <dt class="govuk-summary-list__key">
+            Which department do you work for?
+          </dt>
+          <dd class="govuk-summary-list__value">
+           
+
+            {% if  data['which-department-do-you-work-for'] %}
+            {{ data['which-department-do-you-work-for'] }}
+            {% else %}
+            Are you embarrassed by your department.
+            {% endif %}
+
+
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="/details">
+              Change
+              <span class="govuk-visually-hidden"> name</span>
+            </a>
+          </dd>
+        </div>
+
+      </dl>
+
+    <!-- Details Finished -->
+
+  
+    <!-- Suggestions from the Leadership -->
+
+
+      <h2 class="govuk-heading-m">Advice {{ data['first-name'] }} from the Leadership</h2>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            How satisfied are you with your current work from the home arrangement?
+          </dt>
+          <dd class="govuk-summary-list__value">
+
+            {% if  data['satisfied'] %}
+            {{ data['satisfied'] }}
+            {% else %}
+            Neither satisfied or dissatisfied.
+            {% endif %}
+
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="/satisfied">
+              Change
+              <span class="govuk-visually-hidden"> satisfied</span>
+            </a>
+          </dd>
+        </div>
+
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Do you feel optimistic or pessimistic about working from home?
+          </dt>
+          <dd class="govuk-summary-list__value">
+
+            {% if  data['compared'] %}
+            {{ data['compared'] }}
+            {% else %}
+            Neither optimistic or pessimistic.
+            {% endif %}
+
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="/compared">
+              Change
+              <span class="govuk-visually-hidden"> compared</span>
+            </a>
+          </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            What challenges are you currently facing while working from home?
+          </dt>
+          <dd class="govuk-summary-list__value">
+
+            <ul class="govuk-list govuk-list--bullet">
+              {% for feature in data['challenges'] %}
+                <li>{{ feature }}</li>
+              {% else %}
+            </ul>
+            We are happy that you are facing no challenges.
+            {% endfor %}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="/challenges">
+              Change
+              <span class="govuk-visually-hidden"> challenges</span>
+            </a>
+          </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Do you have a dedicated workspace where you can work at your home?
+          </dt>
+          <dd class="govuk-summary-list__value">
+     
+             {% if  data['dedicated'] %}
+             {{ data['dedicated'] }}
+             {% else %}
+             You should answer this question.
+             {% endif %}
+ 
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="/dedicated">
+              Change
+              <span class="govuk-visually-hidden"> dedicated</span>
+            </a>
+          </dd>
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            What questions do you have for the leadership?
+          </dt>
+          <dd class="govuk-summary-list__value">
+
+
+              {% if  data['leadership'] %}
+              {{ data['leadership'] }}
+              {% else %}
+              No questions for the leadership shows that you need to be more motivated.
+              {% endif %}
+    
+
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="/leadership">
+              Change
+              <span class="govuk-visually-hidden"> leadership</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <h2 class="govuk-heading-m">Now send your application</h2>
+
+      <p>By submitting this survey you are confirming that, to the best of your knowledge, the details you are providing are correct.</p>
+
+      <form action="/confirmation" method="post" novalidate>
+
+        <input type="hidden" name="answers-checked" value="true">
+
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Accept and send
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

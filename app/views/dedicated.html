@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Question page
+{% endblock %}
+
+{% block beforeContent %}
+  <a class="govuk-back-link" href="javascript:window.history.back()">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <form class="form" action="/leadership" method="post" novalidate>
+
+        {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+        {{ govukRadios({
+          classes: "govuk-radios--inline",
+          idPrefix: "dedicated",
+          name: "dedicated",
+          fieldset: {
+            legend: {
+              text: "Do you have a dedicated workspace where you can work at your home?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            text: "Select one option."
+          },
+          items: [
+            {
+              value: "A dedicated workspace allows you to focus and be more productive, well done.",
+              text: "Yes",
+              checked: checked("dedicated", "A dedicated workspace allows you to focus and be more productive, well done.")
+            },
+            {
+              value: "Only amateurs don't have a dedicated workspace you need to fix this.",
+              text: "No",
+              checked: checked("dedicated", "Only amateurs don't have a dedicated workspace you need to fix this.")
+            }
+          ]
+        }) }}
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

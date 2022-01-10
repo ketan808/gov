@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Question page
+{% endblock %}
+
+{% block beforeContent %}
+  <a class="govuk-back-link" href="javascript:window.history.back()">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">Thank you, {{ data['first-name'] }} let’s start with the first question</h1>
+
+      <form class="form" action="/compared" method="post" novalidate>
+
+
+        {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+        {{ govukRadios({
+          idPrefix: "satisfied",
+          name: "satisfied",
+          fieldset: {
+            legend: {
+              text: "How satisfied are you with your current work from the home arrangement?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            text: "Select one option."
+          },
+          items: [
+            {
+              value: "We are happy that you’re satisfied and not missing the commute to work.",
+              text: "Very satisfied",
+              checked: checked("satisfied", "We are happy that you’re satisfied and not missing the commute to work.")
+            },
+            {
+              value: "Sorry to hear that you’re dissatisfied, you should get yourself back in the office.",
+              text: "Very dissatisfied",
+              checked: checked("satisfied", "Sorry to hear that you’re dissatisfied, you should get yourself back in the office.")
+            }
+          ]
+        }) }}
+
+
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Question page
+{% endblock %}
+
+{% block beforeContent %}
+  <a class="govuk-back-link" href="javascript:window.history.back()">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <form class="form" action="/dedicated" method="post" novalidate>
+
+        {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+
+        {{ govukCheckboxes({
+          idPrefix: "challenges",
+          name: "challenges",
+          fieldset: {
+            legend: {
+              text: "What challenges are you currently facing while working from home?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            text: "Select all that apply."
+          },
+          items: [
+            {
+              value: "Stop using your neighbour’s internet connection and get your own",
+              text: "Internet connectivity",
+              checked: checked("challenges", "Stop using your neighbour’s internet connection and get your own")
+            },
+            {
+              value: "Try some mindfulness meditation and also meet up with friends",
+              text: "Social isolation",
+              checked: checked("challenges", "Try some mindfulness meditation and also meet up with friends")
+            },
+            {
+              value: "Try harder to get what you need instead of making excuses",
+              text: "I need access to tools and information to do my job",
+              checked: checked("challenges", "Try harder to get what you need instead of making excuses")
+            },
+            {
+              value: "Avoid your mobile phone, TV and delete your Facebook account",
+              text: "Too many distractions at home",
+              checked: checked("challenges", "Avoid your mobile phone, TV and delete your Facebook account")
+            },
+            {
+              value: "Make it clear to your children when you’re at work and put Peppa Pig on TV",
+              text: "Children",
+              checked: checked("challenges", "Make it clear to your children when you’re at work and put Peppa Pig on TV")
+            }
+
+          ]
+        }) }}
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
